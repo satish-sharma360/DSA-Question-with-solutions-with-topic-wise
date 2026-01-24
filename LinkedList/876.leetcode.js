@@ -46,6 +46,10 @@ list.append(40)
 list.append(50)
 
 console.log(list.findMiddle())
+
+
+
+// Leet code ans
 var middleNode = function(head) {
     if(head.next == null) return head
     let slow = head;
