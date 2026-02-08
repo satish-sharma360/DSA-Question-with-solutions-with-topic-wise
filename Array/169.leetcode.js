@@ -27,3 +27,31 @@ var majorityElement = function (nums) {
 };
 
 // Time: O(n²)
+
+
+var majorityElement = function (nums) {
+    nums.sort((a,b)=> a - b)
+
+    let n = nums.length;
+    let count = 1;           // first element count
+    let candidate = nums[0];
+
+    if(n == 1){
+        return candidate //for nums = [1]
+    }
+
+    for(let i = 1; i < n; i++){
+
+        if(nums[i] === nums[i - 1]){
+            count++
+        }else{
+            candidate = nums[i]
+            count = 1
+        }
+        
+        if(Math.floor(n/2) < count){
+            return candidate
+        }
+    }
+};
+// T.C -> O(nlogn)
