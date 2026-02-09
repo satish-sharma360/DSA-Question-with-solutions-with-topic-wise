@@ -18,3 +18,35 @@ var maxArea = function(height) {
 
     return mostWater
 };
+
+// T.C -> O(n^2)
+
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+
+    let rightPt = height.length - 1;
+    let leftPt = 0;
+
+    let mostWater = 0;
+
+    while(leftPt < rightPt){
+        let width = rightPt - leftPt;
+        let heightOfContainer = Math.min(height[rightPt] , height[leftPt])
+
+        let area = width * heightOfContainer;
+
+        mostWater = Math.max(mostWater , area);
+
+        if(height[rightPt] > height[leftPt]){
+            leftPt++
+        }else{
+            rightPt--
+        }
+    }
+    return mostWater
+};
+
+// T.C -> O(n)
