@@ -21,6 +21,32 @@ let rotateByD = function(arr , d){
     return arr
 }
 
+let rotateByDPlace = function (arr , k) {
+    k = k % arr.length
+    let temp = []
+    // Push last k elements
+    for(let i = arr.length - k ; i < arr.length; i++){
+        temp.push(arr[i])
+        // temp = [5 , 6, 7]
+    }
+
+    // Push remaining elements
+    for (let i = 0; i < arr.length - k ; i++) {
+        temp.push(arr[i])
+        // already temp = [5 , 6, 7]
+        // temp = [1,2,3,4]
+        // now temp = [5 , 6 ,7 ,1,2,3,4]
+    }
+
+    // copy back
+    for(let i = 0; i < arr.length; i++){
+        arr[i] = temp[i]
+    }
+    // Both
+    // return temp
+    return arr
+}
+
 
 
 
@@ -46,4 +72,4 @@ var rotate = function(nums, k) {
     return nums
 };
 
-console.log(rotateByD([1,2,3,4,5,6,7] , 3))
+console.log(rotateByDPlace([1,2,3,4,5,6,7] , 3))
