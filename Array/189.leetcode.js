@@ -48,8 +48,6 @@ let rotateByDPlace = function (arr , k) {
 }
 
 
-
-
 function reverseArray(nums, i, j) {
     while (i < j) {
         [nums[i], nums[j]] = [nums[j], nums[i]];
@@ -73,3 +71,44 @@ var rotate = function(nums, k) {
 };
 
 console.log(rotateByDPlace([1,2,3,4,5,6,7] , 3))
+
+
+
+
+// same question on GFG there is opposite constrain
+
+// User function Template for javascript
+
+/**
+ * @param {number[]} arr
+ * @param {number} k
+ */
+
+class Solution {
+    reverse(arr , i , j){
+        while(i < j){
+            [arr[i] , arr[j]] = [arr[j] , arr[i]]
+            i++;
+            j--;
+        }
+        return arr
+    }
+    leftRotate(arr, k) {
+        // code here
+        k = k % arr.length;
+        
+        
+        // reverse start to k index
+        this.reverse(arr , 0 , k - 1)
+        
+        // reverse from k to end
+        this.reverse(arr, k, arr.length - 1)
+        
+        // Reverse first whole array
+        this.reverse(arr , 0 , arr.length - 1);
+        
+        return arr
+    }
+}
+let obj = new Solution();
+console.log(obj.leftRotate([1,2,3,4,5,6,7] , 3))
