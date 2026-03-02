@@ -59,3 +59,46 @@ var sortedSquares = function(nums) {
 
     return result;
 };
+
+function sortedSSquare(arr){
+    let negativeIndex = -1
+
+    for(let i = 0; i < arr.length; i++){
+        if(arr[i] < 0) negativeIndex = i;
+    }
+
+    let nagitaveArr = [];
+    let positiveArr = [];
+
+    for(let i = negativeIndex; i >= 0 ; i--){
+        nagitaveArr.push(arr[i] * arr[i])
+    }
+
+    for(let i = negativeIndex + 1; i < arr.length; i++){
+        positiveArr.push(arr[i] * arr[i])
+    }
+
+    // Now marge 
+    let x = 0 , y = 0;
+    let result = [];
+
+    while(x < positiveArr.length && y < nagitaveArr.length){
+        if(positiveArr[x] <= nagitaveArr[y]){
+            result.push(positiveArr[x])
+            x++;
+        }else{
+            result.push(nagitaveArr[y])
+            y++;
+        }
+    }
+    while(x < positiveArr.length){
+        result.push(positiveArr[x])
+        x++;
+    }
+    while(y < nagitaveArr.length){
+        result.push(nagitaveArr[y])
+        y++
+    }
+    return result
+}
+console.log(sortedSSquare([-4,-1,0,3,10]))
