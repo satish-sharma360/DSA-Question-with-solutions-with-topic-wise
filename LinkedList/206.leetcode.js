@@ -28,12 +28,12 @@ prev  curr   next
  * @param {ListNode} head
  * @return {ListNode}
  */
-var reverseList = function(head) {
+var reverseList = function (head) {
     let prev = null
     let curr = head;
     let next = null;
 
-    while(curr){
+    while (curr) {
         next = curr.next  // next now at 2
         curr.next = prev; // 1 point to null
         prev = curr;    // prev now on 1
@@ -41,3 +41,113 @@ var reverseList = function(head) {
     }
     return prev
 };
+
+// Length of Linked List
+
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class MyLinkedList {
+    constructor() {
+        this.head = null;
+    }
+    addNode(data) {
+        let newNode = new Node(data);
+
+        if (this.head === null) {
+            this.head = newNode;
+            return;
+        }
+
+        let temp = this.head;
+
+        while (temp.next !== null) {
+            temp = temp.next;
+        }
+
+        temp.next = newNode;
+    }
+
+    length() {
+        let count = 0;
+
+        let temp = this.head;
+
+        if (temp.next === null) return 1;
+
+        while (temp !== null) {
+            count++;
+            temp = temp.next
+        }
+        return count
+    }
+
+    // Brute force 
+    reverseList() {
+        let stack = [];
+
+        if (this.head === null) return head;
+        if (this.head.next === null) return head;
+
+        let temp = this.head;
+        while (temp) {
+            stack.push(temp.data)
+            temp = temp.next;
+        }
+        temp = this.head;
+        while (temp) {
+            temp.data = stack.pop()
+            temp = temp.next;
+        }
+    }
+
+    // optimize
+
+    reverseOptimize(){
+
+        if (this.head === null) return this.head;
+        if (this.head.next === null) return this.head;
+
+        let curr = this.head;
+        let next = null;
+        let prev = null;
+
+        while(curr){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next
+        }
+        this.head = prev
+    }
+
+    print() {
+        let temp = this.head;
+        let result = "";
+
+        while (temp !== null) {
+            result += temp.data + "->"
+            temp = temp.next;
+        }
+        result += "null"
+
+        console.log(result)
+    }
+}
+
+let list = new MyLinkedList();
+
+list.addNode(10)
+list.addNode(20)
+list.addNode(30)
+list.addNode(40)
+
+// list.reverseList()
+list.reverseOptimize()
+list.print()
+
+// console.log("Length: ", list.length())
