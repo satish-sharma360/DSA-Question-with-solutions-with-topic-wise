@@ -27,32 +27,8 @@ prev  curr   next
 
 */
 
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @return {ListNode}
- */
-var reverseList = function (head) {
-    let prev = null
-    let curr = head;
-    let next = null;
 
-    while (curr) {
-        next = curr.next  // next now at 2
-        curr.next = prev; // 1 point to null
-        prev = curr;    // prev now on 1
-        curr = next;    // 1 = 2
-    }
-    return prev
-};
 
-// Length of Linked List
 
 class Node {
     constructor(data) {
@@ -82,70 +58,42 @@ class MyLinkedList {
         temp.next = newNode;
     }
 
-    length() {
-        let count = 0;
+    // Brute Forch Approach
+    detectCycle() {
+        let visited = new Set();
 
         let temp = this.head;
 
-        if (temp.next === null) return 1;
-
-        while (temp !== null) {
-            count++;
-            temp = temp.next
-        }
-        return count
-    }
-
-    // Brute force 
-    reverseList() {
-        let stack = [];
-
-        if (this.head === null) return head;
-        if (this.head.next === null) return head;
-
-        let temp = this.head;
         while (temp) {
-            stack.push(temp.data)
+            if (visited.has(temp)) {
+                return temp.data;
+            }
+            visited.add(temp);
             temp = temp.next;
         }
-        temp = this.head;
-        while (temp) {
-            temp.data = stack.pop()
-            temp = temp.next;
-        }
+        return null
     }
+    // optimize Approach
+    detectCycleOptimize() {
 
-    // optimize
+        let slow = this.head;
+        let fast = this.head;
 
-    reverseOptimize(){
+        while (fast && fast.next) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast === slow) {
+                
+                slow = this.head;
 
-        if (this.head === null) return this.head;
-        if (this.head.next === null) return this.head;
-
-        let curr = this.head;
-        let next = null;
-        let prev = null;
-
-        while(curr){
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next
+                while (slow !== fast) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+                return slow.data
+            }
         }
-        this.head = prev
-    }
-
-    print() {
-        let temp = this.head;
-        let result = "";
-
-        while (temp !== null) {
-            result += temp.data + "->"
-            temp = temp.next;
-        }
-        result += "null"
-
-        console.log(result)
+        return null;
     }
 }
 
@@ -155,7 +103,16 @@ list.addNode(10)
 list.addNode(20)
 list.addNode(30)
 list.addNode(40)
+list.addNode(50)
 
+let temp = list.head;
 
-list.print()
+while (temp.next) {
+    temp = temp.next;
+}
+temp.next = list.head.next;
+
+console.log(list.detectCycle())
+console.log(list.detectCycleOptimize())
+
 
