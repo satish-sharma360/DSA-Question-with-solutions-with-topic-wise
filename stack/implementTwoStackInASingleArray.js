@@ -78,4 +78,3 @@ stackOne.pop2()
 stackOne.push2(3)
 
 stackOne.print()
-
