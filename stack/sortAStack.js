@@ -86,7 +86,8 @@ stack.print()
 
  *  Goes through entire stack → O(n)
  * 👉 O(n²)
- * 
+ 
+
  * 💾 Space Complexity:
 
  * 👉 O(n)
