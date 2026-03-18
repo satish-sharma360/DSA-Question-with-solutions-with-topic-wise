@@ -1,13 +1,13 @@
-class Stack{
-    constructor(size){
+class Stack {
+    constructor(size) {
         this.size = size;
         this.arr = new Array(size);
         this.top = -1;
     }
 
     // push
-    push(value){
-        if(this.top === this.size - 1){
+    push(value) {
+        if (this.top === this.size - 1) {
             console.log("Stack overFlow")
             return;
         }
@@ -18,8 +18,8 @@ class Stack{
     }
 
     //pop
-    pop(){
-        if(this.top === -1){
+    pop() {
+        if (this.top === -1) {
             console.log("Stack Underflow");
             return;
         }
@@ -30,12 +30,12 @@ class Stack{
     }
 
     // FindMid
-    findMid(count = 0, mid = Math.floor((this.top + 1)/2)){
-        if(this.top === -1){
+    findMid(count = 0, mid = Math.floor((this.top + 1) / 2)) {
+        if (this.top === -1) {
             return;
         }
 
-        if(count === mid){
+        if (count === mid) {
             this.pop()
             return;
         }
@@ -44,8 +44,22 @@ class Stack{
         this.findMid(count + 1, mid)
         this.push(temp)
     }
-    print(){
-        console.log(this.arr)
+    deleteMid() {
+        let mid = Math.floor(this.top / 2);
+        let temp = [];
+
+        for (let i = 0; i <= this.top; i++) {
+            if (i !== mid) {
+                temp.push(this.arr[i])
+            };
+        }
+        this.top = -1
+        for (let i = 0; i < temp.length; i++) {
+            this.push(temp[i]);
+        }
+    }
+    print() {
+        console.log(this.arr.slice(0, this.top + 1))
     }
 }
 
