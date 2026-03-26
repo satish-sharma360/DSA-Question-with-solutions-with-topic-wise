@@ -42,3 +42,28 @@ console.log(nextGreaterElement([4,2], [1,2,3,4])) // [-1 ,3]
 // T.C -> O(n^2);
 
 //Better approach
+
+function FindNextGreater(nums1 , nums2){
+    let n = nums2.length;
+    let result = new Map()
+    let stack = [];
+
+    for (let i = n - 1; i >= 0; i--) {
+        while(stack.length > 0 && stack[stack.length - 1] <= nums2[i]){
+            stack.pop()
+        }
+        let nge = stack.length === 0 ? -1 : stack[stack.length - 1]
+
+        result.set(nums2[i] , nge)
+
+        stack.push(nums2[i])
+    }
+    // console.log(result)
+    let ans = [];
+    for (const val of nums1) {
+        ans.push(result.get(val))
+    }
+    return ans;
+}
+console.log(FindNextGreater([4,1,2], [1,3,4,2]))
+console.log(FindNextGreater([4,2], [1,2,3,4]))
