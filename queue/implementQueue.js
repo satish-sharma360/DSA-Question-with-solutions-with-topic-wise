@@ -37,7 +37,7 @@ class Queue{
         let temp = this.head;
         this.head = this.head.next;
         temp.next = null;
-        
+
         if (this.head === null) {
             this.rear = null
         }
@@ -67,6 +67,6 @@ queue.push(10)
 queue.push(20)
 queue.push(30)
 queue.push(40)
-queue.pop(50)
+queue.pop()
 
 queue.print()
