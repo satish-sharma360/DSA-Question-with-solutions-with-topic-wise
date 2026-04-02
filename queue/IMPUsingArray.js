@@ -73,4 +73,3 @@ queue.enqueue(40)
 queue.enqueue(50)
 queue.enqueue(60)
 console.log(queue.dequeue())  
-//61449  2600062
