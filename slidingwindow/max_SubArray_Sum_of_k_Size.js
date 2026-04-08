@@ -20,7 +20,6 @@ function maxSubArraySum(arr , k){
         if (high === arr.length) {
             break;
         }
-
         sum = sum - arr[low - 1] + arr[high]
     }
 
