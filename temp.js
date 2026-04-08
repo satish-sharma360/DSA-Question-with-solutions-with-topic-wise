@@ -1,14 +1,20 @@
 function Solve(arr){
-    let set = new Set()
+    // let set = new Set()
 
+    // for(let i = 0; i < arr.length; i++){
+    //     if (set.has(arr[i])) {
+    //         set.delete(arr[i])
+    //     }else{
+    //         set.add(arr[i])
+    //     }
+    // }
+    // return set;
+
+    let result = 0;
     for(let i = 0; i < arr.length; i++){
-        if (set.has(arr[i])) {
-            set.delete(arr[i])
-        }else{
-            set.add(arr[i])
-        }
+        result ^= arr[i]
     }
-    return set;
+    return result
 }
 
 console.log(Solve([10,20,30,30,20]))
