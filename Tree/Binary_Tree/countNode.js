@@ -44,10 +44,29 @@ function countNodes(root){
 
     return left + right + 1;
 }
+function iterative(root){
+    if (!root) {
+        return 0;
+    }
 
+    let queue = [root];
+    let front = 0;
+    let count = 0;
+
+    while(front < queue.length){
+        let curr = queue[front++];
+        count++;
+
+        if(curr.left) queue.push(curr.left)
+        if(curr.right) queue.push(curr.right)
+    }
+    return count;
+}
 
 let arr = [1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1];
 
 let tree = new BinaryTree()
 let root = tree.buildTree(arr);
 console.log(countNodes(root))
+
+console.log(iterative(root))
