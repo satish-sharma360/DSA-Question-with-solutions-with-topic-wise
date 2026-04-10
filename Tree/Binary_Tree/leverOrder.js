@@ -75,3 +75,64 @@ let root = tree.buildTree(arr);
 console.log("Level Order traversal")
 
 levelOrder(root)
+
+levelOrderFix(root)
+
+final(root)
+/*
+//  In this code two major issue 
+1 -> i am using shift means o(n) because re indexing happen
+2 -> this is not printing level all element print single i want each level new line 
+*/
+
+// First issue fixed
+function levelOrderFix(root){
+    if (!root) {
+        return
+    }
+    let queue = [];
+    let front = 0;
+
+    queue.push(root);
+
+    while(queue.length > front){
+        let curr = queue[front];
+        front++;
+
+        process.stdout.write(curr.data + " ");
+
+        if (curr.left) {
+            queue.push(curr.left)
+        }
+        if (curr.right) {
+            queue.push(curr.right)
+        }
+    }
+    console.log()
+}
+
+// ✅ Fix: Print Each Level in New Line
+function final(root){
+    if (!root) {
+        return;
+    }
+
+    let queue = [];
+    let front = 0;
+
+    queue.push(root)
+
+    while(front < queue.length){
+        let size = queue.length - front;
+
+        for(let i = 0; i < size; i++){
+            let curr = queue[front];
+            front++;
+
+            process.stdout.write(curr.data + " ");
+            if(curr.left) queue.push(curr.left)
+            if(curr.right) queue.push(curr.right)
+        }
+        console.log()
+    }
+}
