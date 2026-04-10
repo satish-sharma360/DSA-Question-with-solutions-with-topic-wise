@@ -46,8 +46,33 @@ function findHeight(root){
     return Math.max(leftHeight , rightHeight) + 1;
 } 
 
+function findheightIterative(root){
+    if (!root) {
+        return 0;
+    }
+
+    let queue = [root];
+    let front = 0;
+    let height = 0;
+
+    while(front < queue.length){
+        let size = queue.length - front;
+
+        for(let i = 0; i < size; i++){
+            let curr = queue[front++];
+
+            if (curr.left) queue.push(curr.left)
+            if (curr.right) queue.push(curr.right)   
+        }
+        height++;
+    }
+    return height
+}
+
 let arr = [1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1];
 
 let tree = new BinaryTree()
 let root = tree.buildTree(arr);
 console.log(findHeight(root))
+
+console.log(findheightIterative(root))
