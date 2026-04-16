@@ -79,6 +79,8 @@ levelOrder(root)
 levelOrderFix(root)
 
 final(root)
+
+LevelTraversal(root)
 /*
 //  In this code two major issue 
 1 -> i am using shift means o(n) because re indexing happen
@@ -134,5 +136,38 @@ function final(root){
             if(curr.right) queue.push(curr.right)
         }
         console.log()
+    }
+}
+
+function LevelTraversal(root){
+    if (!root) {
+        return;
+    }
+    let queue = [root];
+    let front = 0;
+
+    queue.push(null); // marker for level end
+
+    while(front < queue.length){
+        let curr = queue[front];
+        front++;
+
+        if (curr === null) { // means previous level completed
+            console.log(); // new line for next level
+
+            //only push null if more nodes exist
+            if (front < queue.length) {
+                queue.push(null);
+            }
+        }else{
+            process.stdout.write(curr.data + " ");
+            
+            if (curr.left) {
+                queue.push(curr.left)
+            }
+            if (curr.right) {
+                queue.push(curr.right)
+            }
+        }
     }
 }
