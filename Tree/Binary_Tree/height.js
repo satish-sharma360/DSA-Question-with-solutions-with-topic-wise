@@ -1,18 +1,18 @@
 // Find Height of a Binary Tree
 
-class Node{
-    constructor(data){
+class Node {
+    constructor(data) {
         this.data = data;
         this.left = null;
         this.right = null;
     }
 }
 
-class BinaryTree{
-    constructor(){
+class BinaryTree {
+    constructor() {
         this.index = -1;
     }
-    buildTree(arr){
+    buildTree(arr) {
         // index increment
         this.index++;
 
@@ -34,7 +34,7 @@ class BinaryTree{
     }
 }
 
-function findHeight(root){
+function findHeight(root) {
 
     if (root === null) {
         return 0;
@@ -43,30 +43,34 @@ function findHeight(root){
     let leftHeight = findHeight(root.left);
     let rightHeight = findHeight(root.right);
 
-    return Math.max(leftHeight , rightHeight) + 1;
-} 
+    return Math.max(leftHeight, rightHeight) + 1;
+}
 
-function findheightIterative(root){
-    if (!root) {
-        return 0;
-    }
-
+function findheightIterative(root) {
+    if (root === null) return 0;
     let queue = [root];
     let front = 0;
+    queue.push(null)
     let height = 0;
 
-    while(front < queue.length){
-        let size = queue.length - front;
+    while (front < queue.length) {
+        let curr = queue[front++];
 
-        for(let i = 0; i < size; i++){
-            let curr = queue[front++];
-
-            if (curr.left) queue.push(curr.left)
-            if (curr.right) queue.push(curr.right)   
+        if (curr === null) {
+            height++;
+            if (front < queue.length) {
+                queue.push(null)
+            }
+        } else {
+            if (curr.left) {
+                queue.push(curr.left)
+            }
+            if (curr.right) {
+                queue.push(curr.right)
+            }
         }
-        height++;
     }
-    return height
+    return height;
 }
 
 let arr = [1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1];

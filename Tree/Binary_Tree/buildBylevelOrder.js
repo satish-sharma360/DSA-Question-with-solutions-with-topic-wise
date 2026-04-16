@@ -45,7 +45,7 @@ function buildTreeoptimize(arr){
     let root = new Node(arr[0]);
     let queue = [root];
     let front = 0;
-    let i = 0;
+    let i = 1;
 
     while(i < arr.length){
         let curr = queue[front];
@@ -66,3 +66,44 @@ function buildTreeoptimize(arr){
     }
     return root;
 }
+
+function printLevelOrder(root){
+    if (!root) {
+        return;
+    }
+
+    let queue = [root];
+    let front = 0;
+    queue.push(null)
+
+    while(front < queue.length){
+        let node = queue[front++];
+
+        if (node === null) {
+            console.log()
+            if (front < queue.length) {
+                queue.push(null)
+            }
+        }else{
+            process.stdout.write(node.data + " ")
+            if (node.left) {
+                queue.push(node.left)
+            }
+            if (node.right) {
+                queue.push(node.right)
+            }
+        }
+    }
+}
+
+
+let arr = [1,2,3,4,5,null,7];
+let root = buildTreeoptimize(arr);
+printLevelOrder(root)
+/*
+        1
+      /   \
+     2     3
+    / \     \
+   4   5     7
+*/
