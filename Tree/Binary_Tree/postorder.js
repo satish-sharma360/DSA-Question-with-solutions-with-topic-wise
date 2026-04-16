@@ -36,7 +36,7 @@ class BinaryTree {
     }
 }
 
-function inOrder(root) {
+function postOrder(root) {
 
     // Base case
     if (root === null) {
@@ -44,13 +44,35 @@ function inOrder(root) {
     }
 
     //left Subtree
-    inOrder(root.left)
+    postOrder(root.left)
 
     // Right subTree
-    inOrder(root.right)
+    postOrder(root.right)
 
     // Root
     process.stdout.write(root.data + " ");
+}
+
+function postOrderInerative(root){
+    if (!root) {
+        return;
+    }
+
+    let stack1 = [root];
+    let stack2 = [];
+
+    while(stack1.length){
+        let node = stack1.pop()
+        stack2.push(node);
+
+        if(node.left) stack1.push(node.left)
+        if(node.right) stack1.push(node.right)
+    }
+
+    while(stack2.length){
+        let node = stack2.pop();
+        process.stdout.write(node.data + " ");
+    }
 }
 
 let arr = [1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1];
@@ -60,4 +82,7 @@ let root = tree.buildTree(arr);
 
 console.log("Post Order")
 
-inOrder(root);
+postOrder(root);
+console.log()
+console.log("Iteraive")
+postOrderInerative(root)
