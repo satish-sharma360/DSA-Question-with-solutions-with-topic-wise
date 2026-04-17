@@ -1,4 +1,4 @@
-// 
+// sum of all nodes
 
 class Node{
     constructor(data){
