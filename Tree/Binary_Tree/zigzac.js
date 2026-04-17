@@ -1,4 +1,4 @@
-// ZigZag Tree Traversal
+//103 leetcode ZigZag Tree Traversal
 
 function zigZagTraversal(root){
     let ans = [];
@@ -34,3 +34,45 @@ function zigZagTraversal(root){
     }
     return ans;
 }
+
+
+
+
+function reverse(array){
+    let start = 0;
+    let end = array.length - 1;
+    while(start < end){
+        [array[start],array[end]] = [array[end],array[start]]
+        start++;
+        end--;
+    }
+    return array;
+}
+var zigzagLevelOrder = function(root) {
+    if(root === null){
+        return [];
+    }
+    let result = [];
+    let queue = [root];
+    let count = 1;
+    while(queue.length > 0){
+        let length = queue.length;
+        let level = [];
+        for(let i = 0; i < length; i++){
+            let node = queue.shift();
+            level.push(node.val)
+            if(node.left){
+                queue.push(node.left)
+            }
+            if(node.right){
+                queue.push(node.right)
+            }
+        }
+        if(count % 2 === 0){
+            level = reverse(level)
+        }
+        result.push(level);
+        count++;
+    }
+    return result;
+};
